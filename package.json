@@ -1,0 +1,21 @@
+{
+  "name": "automationapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/supertest": "^6.0.2"
+  }
+}
