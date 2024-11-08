@@ -4,7 +4,7 @@ import { getUser } from "../../data/user";
 import {
   deleteFunction,
   logIn,
-  loginTours,
+  logIn2,
   signUp,
   signUp2,
 } from "../../data/helpers";
@@ -18,7 +18,7 @@ describe("LOGIN", () => {
     });
 
     it.skip("Login with correct data", async () => {
-      await loginTours({
+      await logIn({
         email: userImport.email,
         password: userImport.password,
       }).then((response) => {
@@ -28,7 +28,7 @@ describe("LOGIN", () => {
       });
     });
     it("Login with correct data", async () => {
-      let resLogin = await loginTours({
+      let resLogin = await logIn({
         email: userImport.email,
         password: userImport.password,
       });
@@ -46,7 +46,7 @@ describe("LOGIN", () => {
   describe("NEGATIVE TESTING", () => {
     let userImport = getUser();
     it("Login with wrong email", async () => {
-      loginTours({
+      logIn({
         email: userImport.email,
         password: userImport.password,
       }).then((el) => {

@@ -47,7 +47,7 @@ describe("USER SIGNUP", () => {
         });
     });
   });
-  describe.only("NEGATIVE TESTING", () => {
+  describe("NEGATIVE TESTING", () => {
     it("Creat a new user with existing email", async () => {
       const res = await request
         .post("/users/signup")
@@ -90,7 +90,7 @@ describe("USER SIGNUP", () => {
       expect(res.body.status).toBe("error");
       console.log(res.body, "response");
     });
-    it("Creat a new user with empty email and done", function (done) {
+    it.only("Creat a new user with empty email and done", function (done) {
       let importUserEmptyEmail = getUserWithEmptyEmail();
       const res = request
         .post("/users/signup")
@@ -102,16 +102,15 @@ describe("USER SIGNUP", () => {
           expect(res.body.message).toBe(
             "User validation failed: email: Please provide your email"
           );
-
-          //   expect(res.body.error._message).toBe("User validation failed");
-          //   expect(res.body.error.statusCode).toBe(500);
-          //   expect(res.body.error.status).toBe("error");
-          //   expect(res.body.error.name).toBe("ValidatorError");
-          //   expect(res.body.error.message).toBe(
-          //     "User validation failed: email: Please provide your email"
-          //   );
+            expect(res.body.error._message).toBe("User validation failed");
+            expect(res.body.error.statusCode).toBe(500);
+            expect(res.body.error.status).toBe("error");
+            expect(res.body.error.name).toBe("ValidationError");
+            expect(res.body.error.message).toBe(
+              "User validation failed: email: Please provide your email"
+            );
           console.log(res.body.error.errors, "response");
-          return done();
+          done();
         });
     });
 
@@ -327,7 +326,7 @@ describe("USER SIGNUP", () => {
 
       console.log(res.body, "response");
     });
-    it.only("Creat a new user with non-existing role and async/await", async () => {
+    it("Creat a new user with non-existing role and async/await", async () => {
       let importUserUnexistRole = getUserWithUnexistingRole();
       const res = await request
         .post("/users/signup")

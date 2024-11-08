@@ -1,7 +1,7 @@
 import * as supertest from "supertest";
 const request = supertest("localhost:8001/api/v1");
 import { getUser } from "../../data/user";
-import { logIn, loginTours, signUp, signUp2 } from "../../data/helpers";
+import { logIn, logIn2, signUp, signUp2 } from "../../data/helpers";
 
 describe("LOGIN", () => {
   describe("POSITIVE TESTING", () => {
@@ -11,7 +11,7 @@ describe("LOGIN", () => {
       // const res = await
       signUp(userImport).then((el) => {
         expect(el.body.status).toBe("success");
-        logIn({
+        logIn2({
           email: userImport.email,
           password: userImport.password,
         }).then((el2) => {
@@ -29,7 +29,7 @@ describe("LOGIN", () => {
     it("Login with correct data and login function with Promise", async () => {
       signUp(userImport).then((el) => {
         expect(el.body.status).toBe("success");
-        loginTours({
+        logIn({
           email: userImport.email,
           password: userImport.password,
         }).then((el2) => {
@@ -42,7 +42,7 @@ describe("LOGIN", () => {
       try {
         await signUp(userImport).then(async (el) => {
           expect(el.body.status).toBe("success");
-          await loginTours({
+          await logIn({
             email: userImport.email,
             password: userImport.password,
           }).then((el2) => {
@@ -59,7 +59,7 @@ describe("LOGIN", () => {
     it("Login with correct data using then", async () => {
       await signUp(userImport).then((res) => {
         expect(res.body.status).toBe("success");
-        return loginTours({
+        return logIn({
           email: userImport.email,
           password: userImport.password,
         })
@@ -91,7 +91,7 @@ describe("LOGIN", () => {
   describe("NEGATIVE TESTING", () => {
     let userImport = getUser();
     it("Login with wrong email", async () => {
-      loginTours({
+      logIn({
         email: userImport.email,
         password: userImport.password,
       }).then((el) => {
@@ -103,7 +103,7 @@ describe("LOGIN", () => {
     it("Login with wrong password", () => {
       signUp(userImport).then((el) => {
         expect(el.body.status).toBe("success");
-        loginTours({
+        logIn({
           email: userImport.email,
           password: userImport.password + "1",
         }).then((el2) => {
@@ -114,7 +114,7 @@ describe("LOGIN", () => {
       });
     });
     it("Login with empty password", async () => {
-      loginTours({
+      logIn({
         email: userImport.email,
         password: "",
       }).then((el2) => {
@@ -124,7 +124,7 @@ describe("LOGIN", () => {
       });
     });
     it("Login with empty email", async () => {
-      loginTours({
+      logIn({
         email: "",
         password: userImport.password,
       }).then((el2) => {
@@ -134,7 +134,7 @@ describe("LOGIN", () => {
       });
     });
     it("Login with empty email format", async () => {
-      loginTours({
+      logIn({
         email: "email@",
         password: userImport.password,
       }).then((el2) => {
